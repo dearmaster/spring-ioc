@@ -10,4 +10,5 @@ public interface DemoService {
 
     void query();
 
+    void delete2();
 }

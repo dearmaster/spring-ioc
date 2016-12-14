@@ -13,6 +13,11 @@ public class DemoServiceImpl implements DemoService {
         throw new IllegalArgumentException();
     }
 
+    public void delete2() {
+        System.out.println("DemoServiceImpl.delete2");
+        throw new IllegalArgumentException();
+    }
+
     public void update() {
         System.out.println("DemoServiceImpl.update");
         throw new NullPointerException();
