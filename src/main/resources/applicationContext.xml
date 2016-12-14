@@ -37,7 +37,7 @@
     <bean id="demoMethodAroundAdvice" class="com.master.spring.ioc.advice.DemoMethodAroundAdvice" />
     <bean id="demoMethodBeforeAdvice" class="com.master.spring.ioc.advice.DemoMethodBeforeAdvice" />
 
-    <bean id="before" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+    <bean id="around" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
         <property name="advice">
             <bean id="demoRegexMethodAroundAdvice" class="com.master.spring.ioc.advice.DemoRegexMethodAroundAdvice"/>
         </property>
@@ -51,7 +51,7 @@
     <bean id="demoServiceProxyForRegex" class="org.springframework.aop.framework.ProxyFactoryBean">
         <property name="interceptorNames">
             <list>
-                <value>before</value>
+                <value>around</value>
             </list>
         </property>
         <property name="target">
