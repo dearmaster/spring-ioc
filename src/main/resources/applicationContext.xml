@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="employeeService" class="com.master.spring.ioc.service.impl.EmployeeServiceImpl"/>
+
+    <bean id="demoLogAspect" class="com.master.spring.ioc.aspect.DemoAspect"/>
+
+    <!-- use aspectjweaver instead of spring-aop  -->
+    <aop:config>
+        <aop:aspect id="logAspect" ref="demoLogAspect">
+            <aop:pointcut expression="execution(* com.master.spring.ioc.service.EmployeeService.add(..))" id="printLogPointcut" />
+            <aop:around method="printLog" pointcut-ref="printLogPointcut" />
+        </aop:aspect>
+    </aop:config>
+
+
+
+    <bean id="demoService" class="com.master.spring.ioc.service.impl.DemoServiceImpl"/>
+
+    <!-- different sequence of the advice will contribute to different result -->
+    <bean id="demoServiceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="demoService"/>
+        <property name="interceptorNames">
+            <list>
+                <value>demoMethodBeforeAdvice</value>
+                <value>demoMethodAfterReturningAdvice</value>
+                <value>demoMethodAfterThrowingAdvice</value>
+                <value>demoMethodAroundAdvice</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="demoMethodAfterReturningAdvice" class="com.master.spring.ioc.advice.DemoMethodAfterReturningAdvice" />
+    <bean id="demoMethodAfterThrowingAdvice" class="com.master.spring.ioc.advice.DemoMethodAfterThrowingAdvice" />
+    <bean id="demoMethodAroundAdvice" class="com.master.spring.ioc.advice.DemoMethodAroundAdvice" />
+    <bean id="demoMethodBeforeAdvice" class="com.master.spring.ioc.advice.DemoMethodBeforeAdvice" />
+
+</beans>
