@@ -25,7 +25,7 @@ public class EmployeeServiceImplTest extends AbstractJUnit4SpringContextTests {
 
     }
 
-    @Ignore
+    //@Ignore
     @Test
     public void add() throws Exception {
         Assert.assertNotNull(employeeService);
@@ -33,6 +33,7 @@ public class EmployeeServiceImplTest extends AbstractJUnit4SpringContextTests {
         employeeService.add("Test");
     }
 
+    @Ignore
     @Test
     public void delete() throws Exception {
         employeeService.delete();
